@@ -1,0 +1,111 @@
+﻿@model AutoMarket.Models.Motorcycle
+
+@{
+    ViewData["Title"] = "Edit Motorcycle";
+}
+
+<h1>Edit Motorcycle</h1>
+
+<h4>Motorcycle</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FirstRegistration" class="control-label"></label>
+                <input asp-for="FirstRegistration" class="form-control" />
+                <span asp-validation-for="FirstRegistration" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EnginePower" class="control-label"></label>
+                <input asp-for="EnginePower" class="form-control" />
+                <span asp-validation-for="EnginePower" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Location" class="control-label"></label>
+                <input asp-for="Location" class="form-control" />
+                <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MotorcycleType"></label>
+                <select asp-for="MotorcycleType" class="form-control" asp-items="ViewBag.TypeOptions">
+                    <option value="">Select Type</option>
+                </select>
+                <span asp-validation-for="MotorcycleType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MotorcycleBrandId" class="control-label"></label>
+                <select id="MotorcycleBrandId" asp-for="MotorcycleBrandId" class="form-control" asp-items="ViewBag.MotorcycleBrandId">
+                    <option value="">Select Motorcycle Brand</option>
+                </select>
+                <span asp-validation-for="MotorcycleBrandId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MotorcycleModelId" class="control-label"></label>
+                <select id="MotorcycleModelId" asp-for="MotorcycleModelId" class="form-control">
+                    <option value="">Select Motorcycle Model</option>
+                </select>
+                <span asp-validation-for="MotorcycleModelId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Color"></label>
+                <select asp-for="Color" class="form-control" asp-items="ViewBag.ColorOptions">
+                    <option value="">Select Color</option>
+                </select>
+                <span asp-validation-for="Color" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Condition"></label>
+                <select asp-for="Condition" class="form-control" asp-items="ViewBag.ConditionOptions">
+                    <option value="">Select Condition</option>
+                </select>
+                <span asp-validation-for="Condition" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FuelType"></label>
+                <select asp-for="FuelType" class="form-control" asp-items="ViewBag.FuelTypeOptions">
+                    <option value="">Select Fuel Type</option>
+                </select>
+                <span asp-validation-for="FuelType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Mileage"></label>
+                <select asp-for="Mileage" class="form-control" asp-items="ViewBag.MileageOptions">
+                    <option value="">Select Mileage</option>
+                </select>
+                <span asp-validation-for="Mileage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TransmissionType"></label>
+                <select asp-for="TransmissionType" class="form-control" asp-items="ViewBag.TransmissionTypeOptions">
+                    <option value="">Select Transmission Type</option>
+                </select>
+                <span asp-validation-for="TransmissionType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Photos" class="control-label"></label>
+                <input type="file" name="photos" multiple class="form-control" />
+                <span asp-validation-for="Photos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
