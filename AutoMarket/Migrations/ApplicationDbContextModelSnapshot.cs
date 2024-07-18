@@ -17,7 +17,7 @@ namespace AutoMarket.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.23")
+                .HasAnnotation("ProductVersion", "6.0.28")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -55,21 +55,18 @@ namespace AutoMarket.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("EnginePower")
                         .HasColumnType("int");
 
                     b.Property<string>("Features")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("FirstRegistration")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Location")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<float>("Price")
@@ -86,7 +83,7 @@ namespace AutoMarket.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Cars", (string)null);
+                    b.ToTable("Cars");
                 });
 
             modelBuilder.Entity("AutoMarket.Models.CarBrand", b =>
@@ -98,12 +95,11 @@ namespace AutoMarket.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("BrandName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Brands", (string)null);
+                    b.ToTable("Brands");
                 });
 
             modelBuilder.Entity("AutoMarket.Models.CarModel", b =>
@@ -118,14 +114,13 @@ namespace AutoMarket.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ModelName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CarBrandId");
 
-                    b.ToTable("Models", (string)null);
+                    b.ToTable("Models");
                 });
 
             modelBuilder.Entity("AutoMarket.Models.CarPhoto", b =>
@@ -140,18 +135,16 @@ namespace AutoMarket.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ContentType")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("PhotoData")
-                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CarId");
 
-                    b.ToTable("Photos", (string)null);
+                    b.ToTable("Photos");
                 });
 
             modelBuilder.Entity("AutoMarket.Models.Motorcycle", b =>
@@ -169,7 +162,6 @@ namespace AutoMarket.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("EnginePower")
@@ -182,7 +174,6 @@ namespace AutoMarket.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Location")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Mileage")
@@ -214,7 +205,7 @@ namespace AutoMarket.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Motorcycles", (string)null);
+                    b.ToTable("Motorcycles");
                 });
 
             modelBuilder.Entity("AutoMarket.Models.MotorcycleBrand", b =>
@@ -226,12 +217,11 @@ namespace AutoMarket.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("BrandName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("MotorcycleBrands", (string)null);
+                    b.ToTable("MotorcycleBrands");
                 });
 
             modelBuilder.Entity("AutoMarket.Models.MotorcycleModel", b =>
@@ -243,7 +233,6 @@ namespace AutoMarket.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("ModelName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("MotorcycleBrandId")
@@ -253,7 +242,7 @@ namespace AutoMarket.Migrations
 
                     b.HasIndex("MotorcycleBrandId");
 
-                    b.ToTable("MotorcycleModels", (string)null);
+                    b.ToTable("MotorcycleModels");
                 });
 
             modelBuilder.Entity("AutoMarket.Models.MotorcyclePhoto", b =>
@@ -265,21 +254,19 @@ namespace AutoMarket.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("ContentType")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("MotorcycleId")
                         .HasColumnType("int");
 
                     b.Property<byte[]>("PhotoData")
-                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("MotorcycleId");
 
-                    b.ToTable("MotorcyclePhotos", (string)null);
+                    b.ToTable("MotorcyclePhotos");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

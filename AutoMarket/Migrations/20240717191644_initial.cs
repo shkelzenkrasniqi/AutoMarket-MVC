@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AutoMarket.Migrations
 {
-    public partial class init : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -54,7 +54,7 @@ namespace AutoMarket.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BrandName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    BrandName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -67,24 +67,11 @@ namespace AutoMarket.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BrandName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    BrandName = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MotorcycleBrands", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "MotorcycleModels",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ModelName = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MotorcycleModels", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -199,7 +186,7 @@ namespace AutoMarket.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ModelName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ModelName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CarBrandId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -214,46 +201,23 @@ namespace AutoMarket.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Motorcycles",
+                name: "MotorcycleModels",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstRegistration = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EnginePower = table.Column<int>(type: "int", nullable: false),
-                    Price = table.Column<float>(type: "real", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Location = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MotorcycleBrandId = table.Column<int>(type: "int", nullable: false),
-                    MotorcycleModelId = table.Column<int>(type: "int", nullable: false),
-                    MotorcycleTypeId = table.Column<int>(type: "int", nullable: false),
-                    MotorcycleColorId = table.Column<int>(type: "int", nullable: false),
-                    MotorcycleMileageId = table.Column<int>(type: "int", nullable: false),
-                    MotorcycleConditionId = table.Column<int>(type: "int", nullable: false),
-                    MotorcycleTransmissionId = table.Column<int>(type: "int", nullable: false),
-                    MotorcycleFuelTypeId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    ModelName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MotorcycleBrandId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Motorcycles", x => x.Id);
+                    table.PrimaryKey("PK_MotorcycleModels", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Motorcycles_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Motorcycles_MotorcycleBrands_MotorcycleBrandId",
+                        name: "FK_MotorcycleModels_MotorcycleBrands_MotorcycleBrandId",
                         column: x => x.MotorcycleBrandId,
                         principalTable: "MotorcycleBrands",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Motorcycles_MotorcycleModels_MotorcycleModelId",
-                        column: x => x.MotorcycleModelId,
-                        principalTable: "MotorcycleModels",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -265,9 +229,9 @@ namespace AutoMarket.Migrations
                     FirstRegistration = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EnginePower = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<float>(type: "real", nullable: false),
-                    Features = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Location = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Features = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Location = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CarBrandId = table.Column<int>(type: "int", nullable: false),
                     CarModelId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
@@ -301,22 +265,44 @@ namespace AutoMarket.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MotorcyclePhotos",
+                name: "Motorcycles",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PhotoData = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    ContentType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MotorcycleId = table.Column<int>(type: "int", nullable: false)
+                    FirstRegistration = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EnginePower = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<float>(type: "real", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Location = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MotorcycleType = table.Column<int>(type: "int", nullable: false),
+                    Condition = table.Column<int>(type: "int", nullable: false),
+                    Color = table.Column<int>(type: "int", nullable: false),
+                    FuelType = table.Column<int>(type: "int", nullable: false),
+                    Mileage = table.Column<int>(type: "int", nullable: false),
+                    TransmissionType = table.Column<int>(type: "int", nullable: false),
+                    MotorcycleBrandId = table.Column<int>(type: "int", nullable: false),
+                    MotorcycleModelId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MotorcyclePhotos", x => x.Id);
+                    table.PrimaryKey("PK_Motorcycles", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_MotorcyclePhotos_Motorcycles_MotorcycleId",
-                        column: x => x.MotorcycleId,
-                        principalTable: "Motorcycles",
+                        name: "FK_Motorcycles_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Motorcycles_MotorcycleBrands_MotorcycleBrandId",
+                        column: x => x.MotorcycleBrandId,
+                        principalTable: "MotorcycleBrands",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Motorcycles_MotorcycleModels_MotorcycleModelId",
+                        column: x => x.MotorcycleModelId,
+                        principalTable: "MotorcycleModels",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -327,8 +313,8 @@ namespace AutoMarket.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PhotoData = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    ContentType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhotoData = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    ContentType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CarId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -338,6 +324,27 @@ namespace AutoMarket.Migrations
                         name: "FK_Photos_Cars_CarId",
                         column: x => x.CarId,
                         principalTable: "Cars",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MotorcyclePhotos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PhotoData = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    ContentType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MotorcycleId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MotorcyclePhotos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MotorcyclePhotos_Motorcycles_MotorcycleId",
+                        column: x => x.MotorcycleId,
+                        principalTable: "Motorcycles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -402,6 +409,11 @@ namespace AutoMarket.Migrations
                 column: "CarBrandId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_MotorcycleModels_MotorcycleBrandId",
+                table: "MotorcycleModels",
+                column: "MotorcycleBrandId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_MotorcyclePhotos_MotorcycleId",
                 table: "MotorcyclePhotos",
                 column: "MotorcycleId");
@@ -460,9 +472,6 @@ namespace AutoMarket.Migrations
                 name: "Cars");
 
             migrationBuilder.DropTable(
-                name: "MotorcycleBrands");
-
-            migrationBuilder.DropTable(
                 name: "MotorcycleModels");
 
             migrationBuilder.DropTable(
@@ -470,6 +479,9 @@ namespace AutoMarket.Migrations
 
             migrationBuilder.DropTable(
                 name: "Models");
+
+            migrationBuilder.DropTable(
+                name: "MotorcycleBrands");
 
             migrationBuilder.DropTable(
                 name: "Brands");

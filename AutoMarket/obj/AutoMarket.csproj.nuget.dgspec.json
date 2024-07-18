@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Github-projects\\AutoMarket\\AutoMarket\\AutoMarket\\AutoMarket.csproj": {}
+    "D:\\Github\\AutoMarket-MVC\\AutoMarket\\AutoMarket.csproj": {}
   },
   "projects": {
-    "D:\\Github-projects\\AutoMarket\\AutoMarket\\AutoMarket\\AutoMarket.csproj": {
+    "D:\\Github\\AutoMarket-MVC\\AutoMarket\\AutoMarket.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Github-projects\\AutoMarket\\AutoMarket\\AutoMarket\\AutoMarket.csproj",
+        "projectUniqueName": "D:\\Github\\AutoMarket-MVC\\AutoMarket\\AutoMarket.csproj",
         "projectName": "AutoMarket",
-        "projectPath": "D:\\Github-projects\\AutoMarket\\AutoMarket\\AutoMarket\\AutoMarket.csproj",
+        "projectPath": "D:\\Github\\AutoMarket-MVC\\AutoMarket\\AutoMarket.csproj",
         "packagesPath": "C:\\Users\\LED COM\\.nuget\\packages\\",
-        "outputPath": "D:\\Github-projects\\AutoMarket\\AutoMarket\\AutoMarket\\obj\\",
+        "outputPath": "D:\\Github\\AutoMarket-MVC\\AutoMarket\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\LED COM\\AppData\\Roaming\\NuGet\\NuGet.Config",
