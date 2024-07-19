@@ -227,7 +227,7 @@ namespace AutoMarket.Controllers
         {
             return (_context.Motorcycles?.Any(e => e.Id == id)).GetValueOrDefault();
         }
-        public async Task<IActionResult> FilterCars(
+        public async Task<IActionResult> FilterMotorcycles(
         [FromQuery] int? brandId,
         [FromQuery] int? modelId,
         [FromQuery] FuelType? fuelType,

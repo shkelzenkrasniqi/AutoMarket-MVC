@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "O1+y5lrDzcuXJpv0gqlKwxko9cHA51pffiF8pbqYrlg=",
+  "Hash": "NaOQLkqYy1k0Y3Pb7aEltu2VztyBrhLunbkcLZO8j4E=",
   "Source": "AutoMarket",
   "BasePath": "_content/AutoMarket",
   "Mode": "Default",
@@ -2354,12 +2354,12 @@
       "OriginalItemSpec": "wwwroot\\uploads\\AutoMarket.png"
     },
     {
-      "Identity": "D:\\Github\\AutoMarket-MVC\\AutoMarket\\wwwroot\\uploads\\s.jpg",
+      "Identity": "D:\\Github\\AutoMarket-MVC\\AutoMarket\\wwwroot\\uploads\\car.mp4",
       "SourceId": "AutoMarket",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Github\\AutoMarket-MVC\\AutoMarket\\wwwroot\\",
       "BasePath": "_content/AutoMarket",
-      "RelativePath": "uploads/s.jpg",
+      "RelativePath": "uploads/car.mp4",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -2370,7 +2370,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\s.jpg"
+      "OriginalItemSpec": "wwwroot\\uploads\\car.mp4"
     }
   ]
 }

@@ -4,69 +4,102 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<style>
+    /* Custom styles for image size */
+    .carousel-item img {
+        max-height: 600px; /* Adjust max height as needed */
+        width: auto; /* Maintain aspect ratio */
+        margin: auto; /* Center the image horizontally */
+    }
 
-<div>
-    <h4>Car</h4>
-    <hr />
+    .carousel-indicators img {
+        max-height: 100px; /* Adjust thumbnail max height */
+        width: auto; /* Maintain aspect ratio */
+    }
+</style>
+
+<h1 class="mb-4">Car Details</h1>
+
+<div class="container">
+    <h4 class="mb-4">Car Photos</h4>
     @if (Model.Photos != null && Model.Photos.Any())
     {
+        <div id="carCarousel" class="carousel slide mb-4" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                @for (int i = 0; i < Model.Photos.Count; i++)
+                {
+                    <div class="carousel-item @(i == 0 ? "active" : "")">
+                        <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Photos[i].PhotoData)" class="d-block w-100" alt="Car Photo" />
+                    </div>
+                }
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
         <div class="row">
-            @foreach (var photo in Model.Photos)
+            @for (int i = 0; i < Model.Photos.Count; i++)
             {
-                <div class="col-md-3 mb-3">
-                    <img src="data:image/jpeg;base64,@Convert.ToBase64String(photo.PhotoData)" alt="Car Photo" class="img-fluid" />
+                <div class="col-2">
+                    <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Photos[i].PhotoData)" class="img-thumbnail" data-bs-target="#carCarousel" data-bs-slide-to="@i" @(i == 0 ? "class=active" : "") alt="Car Thumbnail" />
                 </div>
             }
         </div>
     }
+
+    <h4 class="mt-4">Car Information</h4>
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.FirstRegistration)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.FirstRegistration)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.EnginePower)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.EnginePower)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Price)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Price)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Features)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Features)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Description)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Description)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Location)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Location)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CarBrand)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CarBrand.BrandName)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CarModel)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CarModel.ModelName)
         </dd>
         <dt class="col-sm-2">
@@ -118,8 +151,11 @@
             @Html.DisplayFor(model => model.User.PhoneNumber)
         </dd>
 
-    </dl>
+    <div class="mt-4">
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
 </div>
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+}

@@ -7,6 +7,7 @@ using X.PagedList;
 using Microsoft.AspNetCore.Identity;
 using AutoMarket.ViewModel;
 using Models.Enums;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AutoMarket.Controllers
 {
@@ -61,6 +62,7 @@ namespace AutoMarket.Controllers
             return View(car);
         }
         // GET: Cars/Create
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["CarBrandId"] = new SelectList(_context.Brands, "Id", "BrandName");
@@ -228,21 +230,46 @@ namespace AutoMarket.Controllers
           return (_context.Cars?.Any(e => e.Id == id)).GetValueOrDefault();
         }
         public async Task<IActionResult> FilterCars(
-        [FromQuery] int? brandId,
-        [FromQuery] int? modelId,
-        [FromQuery] FuelType? fuelType,
-        [FromQuery] Color? color,
-        [FromQuery] Condition? condition,
-        [FromQuery] Mileage? mileage,
-        [FromQuery] CarSeats? seats,
-        [FromQuery] TransmissionType? transmissionType,
-        [FromQuery] DateTime? StartDate,
-        [FromQuery] DateTime? EndDate,
-        [FromQuery] string sortByPrice,
-        [FromQuery] float? minPrice,
-        [FromQuery] float? maxPrice
-        )
+    [FromQuery] int? brandId,
+    [FromQuery] int? modelId,
+    [FromQuery] FuelType? fuelType,
+    [FromQuery] Color? color,
+    [FromQuery] Condition? condition,
+    [FromQuery] Mileage? mileage,
+    [FromQuery] CarSeats? seats,
+    [FromQuery] TransmissionType? transmissionType,
+    [FromQuery] DateTime? StartDate,
+    [FromQuery] DateTime? EndDate,
+    [FromQuery] string sortByPrice,
+    [FromQuery] float? minPrice,
+    [FromQuery] float? maxPrice)
         {
+            var viewModel = new FilterCarsViewModel
+            {
+                Brands = await _context.Brands.ToListAsync(),
+                Models = await _context.Models.ToListAsync(),
+                FilteredCars = new List<Car>()
+            };
+
+            // Check if any filter parameters are provided
+            if (!brandId.HasValue &&
+                !modelId.HasValue &&
+                !fuelType.HasValue &&
+                !color.HasValue &&
+                !condition.HasValue &&
+                !mileage.HasValue &&
+                !seats.HasValue &&
+                !transmissionType.HasValue &&
+                !StartDate.HasValue &&
+                !EndDate.HasValue &&
+                string.IsNullOrEmpty(sortByPrice) &&
+                !minPrice.HasValue &&
+                !maxPrice.HasValue)
+            {
+                // No filter parameters provided, return the view model without any filtered cars
+                return View(viewModel);
+            }
+
             IQueryable<Car> query = _context.Cars
                 .Include(c => c.CarBrand)
                 .Include(c => c.CarModel)
@@ -309,17 +336,11 @@ namespace AutoMarket.Controllers
                     break;
             }
 
-            var filteredCars = await query.ToListAsync();
-
-            var viewModel = new FilterCarsViewModel
-            {
-                Brands = await _context.Brands.ToListAsync(),
-                Models = await _context.Models.ToListAsync(),
-                FilteredCars = filteredCars
-            };
+            viewModel.FilteredCars = await query.ToListAsync();
 
             return View(viewModel);
         }
+
         [HttpGet]
         public IActionResult GetModelsByBrand(int brandId)
         {

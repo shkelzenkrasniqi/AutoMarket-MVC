@@ -1,0 +1,151 @@
+﻿@model AutoMarket.ViewModel.FilterMotorcyclesViewModel
+
+@{
+    ViewData["Title"] = "Filter Motorcycles";
+}
+
+<h2 class="text-center my-4">Filter Motorcycles</h2>
+
+<div class="container">
+    @using (Html.BeginForm("FilterMotorcycles", "Motorcycles", FormMethod.Get))
+    {
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Brand:</label>
+                    @Html.DropDownListFor(model => model.BrandId, new SelectList(Model.Brands, "Id", "BrandName"), "Select Brand", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Model:</label>
+                    @Html.DropDownListFor(model => model.ModelId, new SelectList(Model.Models, "Id", "ModelName"), "Select Model", new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Fuel Type:</label>
+                    @Html.DropDownListFor(model => model.fuelType, new SelectList(Enum.GetValues(typeof(Models.Enums.FuelType))), "Select Fuel Type", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Color:</label>
+                    @Html.DropDownListFor(model => model.color, new SelectList(Enum.GetValues(typeof(Models.Enums.Color))), "Select Color", new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Mileage:</label>
+                    @Html.DropDownListFor(model => model.mileage, new SelectList(Enum.GetValues(typeof(Models.Enums.Mileage))), "Select Mileage", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Transmission Type:</label>
+                    @Html.DropDownListFor(model => model.transmissionType, new SelectList(Enum.GetValues(typeof(Models.Enums.TransmissionType))), "Select Transmission Type", new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Start Date:</label>
+                    @Html.TextBoxFor(model => model.StartDate, new { type = "date", @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>End Date:</label>
+                    @Html.TextBoxFor(model => model.EndDate, new { type = "date", @class = "form-control" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Sort by Price:</label>
+                    @Html.DropDownListFor(model => model.SortByPrice, new SelectList(new[]
+                             {
+                new { Value = "lowToHigh", Text = "Low to High" },
+                new { Value = "highToLow", Text = "High to Low" }
+                }, "Value", "Text"), "Select Sort Order", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Condition:</label>
+                    @Html.DropDownListFor(model => model.condition, new SelectList(Enum.GetValues(typeof(Models.Enums.Condition))), "Select Condition", new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Price Range:</label>
+                    <div class="form-row">
+                        <div class="col">
+                            @Html.TextBoxFor(model => model.MinPrice, new { placeholder = "Min Price", @class = "form-control" })
+                        </div>
+                        <div class="col">
+                            @Html.TextBoxFor(model => model.MaxPrice, new { placeholder = "Max Price", @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Motorcycle Type:</label>
+                    @Html.DropDownListFor(model => model.type, new SelectList(Enum.GetValues(typeof(Models.Enums.MotorcycleType))), "Select Motorcycle Type", new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </div>
+    }
+</div>
+
+@if (Model.FilteredMotorcycles != null && Model.FilteredMotorcycles.Any())
+{
+    <h3 class="text-center my-4">Filtered Motorcycles</h3>
+    <div class="container">
+        <div class="row">
+            @foreach (var motorcycle in Model.FilteredMotorcycles)
+            {
+                <a href="@Url.Action("Details", "Motorcycles", new { id = motorcycle.Id })" class="col-md-4" style="text-decoration: none; color: inherit;">
+                    <div class="card mb-4 shadow-sm" style="border: 1px solid #dee2e6; border-radius: 0.25rem; cursor: pointer;">
+                        @if (motorcycle.Photos != null && motorcycle.Photos.Any())
+                        {
+                            <img src="data:@(motorcycle.Photos.First().ContentType);base64,@(Convert.ToBase64String(motorcycle.Photos.First().PhotoData))" alt="Motorcycle Photo" style="height: 200px; object-fit: cover; border-top-left-radius: 0.25rem; border-top-right-radius: 0.25rem;">
+                        }
+                        else
+                        {
+                            <img src="path/to/default/image.jpg" alt="No Photo" style="height: 200px; object-fit: cover; border-top-left-radius: 0.25rem; border-top-right-radius: 0.25rem;">
+                        }
+                        <div class="card-body" style="padding: 1rem;">
+                            <h5 class="card-title" style="font-size: 1.25rem; margin-bottom: 0.75rem;">@motorcycle.MotorcycleBrand.BrandName @motorcycle.MotorcycleModel.ModelName</h5>
+                            <p class="card-text" style="font-size: 0.875rem;">
+                                <strong>Date:</strong> @motorcycle.FirstRegistration.ToShortDateString()<br>
+                                <strong>Fuel Type:</strong> @motorcycle.FuelType<br>
+                                <strong>Color:</strong> @motorcycle.Color<br>
+                                <strong>Transmission:</strong> @motorcycle.TransmissionType<br>
+                                <h4><strong>Price:</strong> @motorcycle.Price $</h4>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            }
+        </div>
+    </div>
+}

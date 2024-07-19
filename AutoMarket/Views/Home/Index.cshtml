@@ -2,7 +2,89 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - AutoMarket</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+
+        .bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 1; /* Ensure content is above the video */
+            height: 100vh; /* Full viewport height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+
+        .content {
+            max-width: 600px; /* Adjust as needed */
+            padding: 20px;
+        }
+
+            .content h1 {
+                font-size: 4rem;
+                margin-bottom: 1rem;
+                font-weight: bold;
+                color: black;
+            }
+
+            .content p {
+                font-size: 1.5rem;
+                margin-bottom: 2rem;
+                color: black;
+                font-weight: bold;
+            }
+
+            .content a {
+                font-size: 1.5rem;
+                padding: 0.75rem 2rem;
+                color: white;
+                background-color: #007bff;
+                border: none;
+                border-radius: 5px;
+                text-decoration: none;
+            }
+
+                .content a:hover {
+                    background-color: #0056b3;
+                }
+
+        main {
+            padding-top: 56px; /* Adjust based on your navbar height */
+        }
+    </style>
+</head>
+<body>
+    <video class="bg-video" autoplay muted loop>
+        <source src="~/uploads/car.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <main role="main" class="content-wrapper">
+        <div class="content">
+            <h1 class="display-4">Find Your Perfect Car</h1>
+            <p>Explore our wide selection of cars and find the perfect match for you.</p>
+            <a href="/cars/filtercars" class="btn btn-primary btn-lg">Get Started</a>
+        </div>
+    </main>
+</body>
+</html>

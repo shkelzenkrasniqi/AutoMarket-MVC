@@ -11,55 +11,70 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            @{var isAdmin = User.IsInRole("Admin");
-            if(isAdmin){
-            <!-- Left-side navigation -->
-            <nav class="col-md-2 d-md-block bg-light sidebar">
-                <div class="sidebar-sticky">
-                    <h5 class="my-4">Auto-Market</h5>
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="CarBrands" asp-action="Index">Car Brands</a>
-                            <ul class="nav flex-column pl-3">
+            @{
+                var isAdmin = User.IsInRole("Admin");
+                if (isAdmin)
+                {
+                    <!-- Left-side navigation -->
+                    <nav class="col-md-2 d-md-block bg-dark sidebar">
+                        <div class="position-sticky pt-3">
+                            <h5 class="text-white text-center">Auto-Market</h5>
+                            <ul class="nav flex-column">
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="CarBrands" asp-action="Create">Add a Car Brand</a>
+                                    <a class="nav-link text-light" asp-area="Admin" asp-controller="Home" asp-action="Index">
+                                        <span data-feather="home"></span>
+                                        Admin
+                                    </a>
                                 </li>
-                                
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="CarModels" asp-action="Index">Car Models</a>
-                            <ul class="nav flex-column pl-3">
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="CarModels" asp-action="Create">Add a Car Model</a>
+                                    <a class="nav-link text-light" asp-area="Admin" asp-controller="CarBrands" asp-action="Index">
+                                        <span data-feather="file"></span>
+                                        Car Brands
+                                    </a>
+                                    <ul class="nav flex-column ms-3">
+                                        <li class="nav-item">
+                                            <a class="nav-link text-light" asp-area="Admin" asp-controller="CarBrands" asp-action="Create">Add a Car Brand</a>
+                                        </li>
+                                    </ul>
                                 </li>
-                                
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="MotorcycleBrands" asp-action="Index">Motorcycle Brands</a>
-                            <ul class="nav flex-column pl-3">
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="MotorcycleBrands" asp-action="Create">Create Motorcycle Brand</a>
+                                    <a class="nav-link text-light" asp-area="Admin" asp-controller="CarModels" asp-action="Index">
+                                        <span data-feather="shopping-cart"></span>
+                                        Car Models
+                                    </a>
+                                    <ul class="nav flex-column ms-3">
+                                        <li class="nav-item">
+                                            <a class="nav-link text-light" asp-area="Admin" asp-controller="CarModels" asp-action="Create">Add a Car Model</a>
+                                        </li>
+                                    </ul>
                                 </li>
-
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="MotorcycleModels" asp-action="Index">Motorcycle Models</a>
-                            <ul class="nav flex-column pl-3">
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="MotorcycleModels" asp-action="Create">Create Motorcycle Model</a>
+                                    <a class="nav-link text-light" asp-area="Admin" asp-controller="MotorcycleBrands" asp-action="Index">
+                                        <span data-feather="users"></span>
+                                        Motorcycle Brands
+                                    </a>
+                                    <ul class="nav flex-column ms-3">
+                                        <li class="nav-item">
+                                            <a class="nav-link text-light" asp-area="Admin" asp-controller="MotorcycleBrands" asp-action="Create">Create Motorcycle Brand</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" asp-area="Admin" asp-controller="MotorcycleModels" asp-action="Index">
+                                        <span data-feather="bar-chart-2"></span>
+                                        Motorcycle Models
+                                    </a>
+                                    <ul class="nav flex-column ms-3">
+                                        <li class="nav-item">
+                                            <a class="nav-link text-light" asp-area="Admin" asp-controller="MotorcycleModels" asp-action="Create">Create Motorcycle Model</a>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-            }}
+                        </div>
+                    </nav>
+                }
+            }
             <!-- Main content area -->
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
                 @RenderBody()
